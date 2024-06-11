@@ -10,6 +10,14 @@ app.use(express.json());
 
 // Define the GET API route to retrieve product data
 app.get("/products", (req, res) => {
+  if (req.query.search) {
+    const query = req.query.search.toLowerCase();
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(query)
+    );
+    return res.json(filteredProducts);
+  }
+
   return res.json(products);
 });
 
