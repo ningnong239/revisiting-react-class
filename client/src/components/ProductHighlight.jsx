@@ -4,17 +4,21 @@ import { useState, useEffect } from "react";
 
 function ProductHighlight() {
   const [products, setProducts] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const getProducts = async () => {
+    //      http://localhost:4000/products?search=""
+    //      http://localhost:4000/products?search="green"
+
     const productDataFromServer = await axios.get(
-      "http://localhost:4000/products"
+      `http://localhost:4000/products?search=${searchText}`
     );
     setProducts(productDataFromServer.data);
   };
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [searchText]);
 
   return (
     <section className="bg-gray-200 py-8">
@@ -25,6 +29,10 @@ function ProductHighlight() {
             type="text"
             placeholder="Search products..."
             className="p-2 border border-gray-400 rounded"
+            value={searchText}
+            onChange={(event) => {
+              setSearchText(event.target.value);
+            }}
           />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
