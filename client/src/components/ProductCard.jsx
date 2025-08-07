@@ -1,10 +1,10 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 function ProductCard(props) {
+    const {imgSrc ,productName, price} = props;
   return (
     <div className="bg-white p-4 shadow-md">
-      <img
-        src={props.imgSrc}
+ <img src={props.imgSrc}
         alt="The Lorem Ipsum for photos."
         className="w-full mb-2"
       />
